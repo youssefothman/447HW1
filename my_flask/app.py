@@ -21,7 +21,6 @@ def index():
 
 @app.route('/add', methods=['POST', 'GET'])
 def add():
-
     if request.method == "POST":
         person_name = request.form['name']
         person_id = request.form['id']
@@ -39,9 +38,18 @@ def add():
         people = Person.query.order_by(Person.id)
         return render_template("add.html", people=people)
 
-@app.route('/update')
-def update():
-    return render_template("update.html")
+@app.route('/update/<int:id>', methods=['POST', 'GET'])
+def update(id):
+    id_to_update = Person.query.get_or_404(id)
+    if request.method == "POST":
+        id_to_update.points = request.form['points']
+        try:
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "Ther was an error updating that person's points."
+    else:
+        return render_template("update.html", id_to_update=id_to_update)
 
 @app.route('/delete')
 def delete():

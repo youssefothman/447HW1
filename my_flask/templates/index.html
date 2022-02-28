@@ -18,7 +18,7 @@
     <tr>
       <th scope="row">{{ person.id }}</th>
       <td>{{ person.name }}</td>
-      <td>{{ person.points }}</td>
+      <td>{{ person.points }}<a href="/update/{{ person.id }}" class="btn btn-outline-secondary btn-sm">Update</a></td>
     </tr>
         {% endfor %}
 
