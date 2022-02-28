@@ -13,11 +13,12 @@ p5 = Person("Andrew Whitehead", 425, 99)
 p6 = Person("Lynn Roberts", 626, 90)
 p7 = Person("Robert Sanders", 287, 75)
 
-cur.execute("""CREATE TABLE people (
+"""
+cur.execute(CREATE TABLE people (
                 name text,
                 id integer,
                 points integer
-                )""")
+                ))
 con.commit()
 
 cur.execute("INSERT INTO people VALUES (:name, :id, :points)",
@@ -42,7 +43,7 @@ cur.execute("INSERT INTO people VALUES (:name, :id, :points)",
 {'name':p7.name, 'id':p7.id, 'points':p7.points})
 
 con.commit()
-
+"""
 cur.execute("SELECT * FROM people WHERE name='Robert Sanders'")
 print(cur.fetchall())
 
