@@ -5,6 +5,25 @@ con = sqlite3.connect('people.db')
 
 cur = con.cursor()
 
+def insert_person(pers):
+    with con:
+        cur.execute("INSERT INTO people VALUES (:name, :id, :points)",
+                    {'name':pers.name, 'id':pers.id, 'points':pers.points})
+
+def search_by_id(id):
+    cur.execute("SELECT * FROM people WHERE id=:id", {'id': id})
+    return cur.fetchall()
+
+def update_points(pers, points):
+    with con:
+        cur.execute("UPDATE people SET points = :points WHERE id = :id",
+                    {'points':points, 'id':pers.id})
+
+def remove_person(pers):
+    with con:
+        cur.execute("DELETE from people  WHERE id  = :id", {'id':pers.id})
+
+#make all the people
 p1 = Person("Steven Smith", 211, 80)
 p2 = Person("Jian Wong", 122, 92)
 p3 = Person("Chris Peterson", 213, 91)
@@ -14,6 +33,8 @@ p6 = Person("Lynn Roberts", 626, 90)
 p7 = Person("Robert Sanders", 287, 75)
 
 """
+#create a table to hold all the people with 3 columns
+#table name is people
 cur.execute(CREATE TABLE people (
                 name text,
                 id integer,
@@ -21,6 +42,7 @@ cur.execute(CREATE TABLE people (
                 ))
 con.commit()
 
+#insert all the people one by one into the list
 cur.execute("INSERT INTO people VALUES (:name, :id, :points)",
 {'name':p1.name, 'id':p1.id, 'points':p1.points})
 
@@ -44,7 +66,9 @@ cur.execute("INSERT INTO people VALUES (:name, :id, :points)",
 
 con.commit()
 """
-cur.execute("SELECT * FROM people WHERE name='Robert Sanders'")
+
+#this returns the list
+cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
 print(cur.fetchall())
 
 con.close()
