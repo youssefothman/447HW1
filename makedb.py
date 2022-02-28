@@ -1,7 +1,7 @@
-import _sqlite3
+import sqlite3
 from person import Person
 
-con = _sqlite3.connect('people.db')
+con = sqlite3.connect('people.db')
 
 cur = con.cursor()
 
@@ -13,12 +13,12 @@ p5 = Person("Andrew Whitehead", 425, 99)
 p6 = Person("Lynn Roberts", 626, 90)
 p7 = Person("Robert Sanders", 287, 75)
 
-#cur.execute("""CREATE TABLE people (
-#                name text,
-#                id integer,
-#                points integer
-#                )""")
-#con.commit()
+cur.execute("""CREATE TABLE people (
+                name text,
+                id integer,
+                points integer
+                )""")
+con.commit()
 
 cur.execute("INSERT INTO people VALUES (:name, :id, :points)",
 {'name':p1.name, 'id':p1.id, 'points':p1.points})
