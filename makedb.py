@@ -40,3 +40,12 @@ cur.execute("INSERT INTO people VALUES (:name, :id, :points)",
 
 cur.execute("INSERT INTO people VALUES (:name, :id, :points)",
 {'name':p7.name, 'id':p7.id, 'points':p7.points})
+
+con.commit()
+
+cur.execute("SELECT * FROM people WHERE name='Robert Sanders'")
+print(cur.fetchall())
+
+con.close()
+
+
