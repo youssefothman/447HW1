@@ -47,10 +47,14 @@ def update(id):
             db.session.commit()
             return redirect('/')
         except:
-            return "Ther was an error updating that person's points."
+            return "There was an error updating that person's points."
     else:
         return render_template("update.html", id_to_update=id_to_update)
 
 @app.route('/delete')
 def delete():
     return render_template("delete.html")
+
+@app.route('/search')
+def search():
+    return render_template("search.html")
