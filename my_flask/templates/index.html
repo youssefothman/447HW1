@@ -5,10 +5,25 @@
   <div>
     <h1>Home Page</h1>
   </div>
-{% for person in people %}
-      <h4>
-        {{ person.id }}{{ person.name }}{{ person.points }}
-      </h4>
-    {% endfor %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Points</th>
+    </tr>
+  </thead>
+      <tbody>
+    {% for person in people %}
+    <tr>
+      <th scope="row">{{ person.id }}</th>
+      <td>{{ person.name }}</td>
+      <td>{{ person.points }}</td>
+    </tr>
+        {% endfor %}
+
+  </tbody>
+</table>
+
 
 {% endblock %}
