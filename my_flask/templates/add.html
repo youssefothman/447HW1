@@ -3,6 +3,20 @@
 
   <div>
     <h1>Add Page</h1>
+    <br/>
+    <form action="/add" METHOD="POST">
+      <input type="text" placeholder="Name" name="name">
+      <input type="number" placeholder="ID" name="id">
+      <input type="number" placeholder="Points" name="points">
+      <input type="submit" value="Add Name" class="btn btn-secondary">
+
+    </form>
+    <br/><br/>
+    {% for person in people %}
+      <h4>
+        {{ person.id }}
+      </h4>
+    {% endfor %}
   </div>
 
 {% endblock %}
