@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="gl.umbc.edu" id="b07fdc7c-c508-4c3f-afea-7d3e61668c02" port="22" nameFormat="DESCRIPTIVE" username="yothman1" />
+    </configs>
+  </component>
+</project>

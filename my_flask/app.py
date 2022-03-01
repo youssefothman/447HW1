@@ -14,6 +14,7 @@ class Person(db.Model):
     def __repr__(self):
         return '<Name %r>' % self.id
 
+
 @app.route('/')
 def index():
     people = Person.query.order_by(Person.id)
@@ -51,10 +52,29 @@ def update(id):
     else:
         return render_template("update.html", id_to_update=id_to_update)
 
-@app.route('/delete')
-def delete():
-    return render_template("delete.html")
+@app.route('/delete/<int:id>', methods=['POST', 'GET'])
+def delete(id):
+    id_to_delete = Person.query.get_or_404(id)
+    if request.method == "POST":
+        try:
+            db.session.delete(id_to_delete)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "There was an error deleting that person."
+    else:
+        return render_template("delete.html", id_to_delete=id_to_delete)
 
-@app.route('/search')
+@app.route('/search/<int:id>', methods=['POST'])
 def search():
-    return render_template("search.html")
+    return render_template("search.html", id_to_search=0)
+def search(id):
+    id_to_search = Person.query.get_or_404(id)
+    if request.method == "POST":
+        try:
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "That ID does not match anyone."
+    else:
+        return render_template("delete.html", id_to_search=id_to_search)

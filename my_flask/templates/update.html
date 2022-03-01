@@ -2,13 +2,14 @@
 {% block content %}
 
   <div>
-    <h1>Update Page</h1>
-    <br/>
-    <h2>Enter ID for person you want to change and the new value of their points.</h2>
+    <h2 class="text-center">Update Page</h2>
+    <h3 class="text-center">Enter new points value for: {{ id_to_update.name }}, ID: {{ id_to_update.id }}</h3>
     <br/>
     <form action="/update/{{id_to_update.id}}" METHOD="POST">
+      <p class="text-center">
       <input type="number" placeholder="Points" name="points" value="{{id_to_update.points}}">
       <input type="submit" value="Update Points" class="btn btn-outline-secondary btn-sm">
+      </p>
     </form>
   </div>
 {% endblock %}
