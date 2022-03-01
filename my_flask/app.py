@@ -18,7 +18,7 @@ class Person(db.Model):
 @app.route('/')
 def index():
     people = Person.query.order_by(Person.id)
-    return render_template("index.html", people=people)
+    return render_template("index.html", people=people, id_to_search=0)
 
 @app.route('/add', methods=['POST', 'GET'])
 def add():
@@ -65,16 +65,15 @@ def delete(id):
     else:
         return render_template("delete.html", id_to_delete=id_to_delete)
 
-@app.route('/search/<int:id>', methods=['POST'])
-def search():
-    return render_template("search.html", id_to_search=0)
+
+@app.route('/search/<int:id>', methods=['POST', 'GET'])
 def search(id):
     id_to_search = Person.query.get_or_404(id)
     if request.method == "POST":
         try:
             db.session.commit()
-            return redirect('/')
+            return render_template('search.html',id_to_search=id_to_search)
         except:
             return "That ID does not match anyone."
     else:
-        return render_template("delete.html", id_to_search=id_to_search)
+        return render_template("search.html", id_to_search=id_to_search)

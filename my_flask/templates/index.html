@@ -25,9 +25,11 @@
 
   </tbody>
 </table>
+      <form action="/search/{{ searched }}" METHOD="POST">
       <p class="text-center">
-      <a href="/search" class="btn btn-outline-info">Search</a>
+      <input type="number" placeholder="Enter ID" name="searched">
+          <a href="/search/{{ searched }}" class="btn btn-outline-info btn-sm">Search</a>
       </p>
-
+    </form>
 
 {% endblock %}
