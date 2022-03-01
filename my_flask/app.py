@@ -66,14 +66,18 @@ def delete(id):
         return render_template("delete.html", id_to_delete=id_to_delete)
 
 
-@app.route('/search/<int:id>', methods=['POST', 'GET'])
-def search(id):
-    id_to_search = Person.query.get_or_404(id)
+@app.route('/search', methods=['POST', 'GET'])
+def search():
+    id_to_search = Person.query.get_or_404(request.form["searched"])
     if request.method == "POST":
         try:
             db.session.commit()
-            return render_template('search.html',id_to_search=id_to_search)
+            return render_template("search.html",id_to_search=id_to_search)
         except:
             return "That ID does not match anyone."
     else:
-        return render_template("search.html", id_to_search=id_to_search)
+        return render_template("search.html",id_to_search=id_to_search)
+
+@app.route('/lookup')
+def lookup():
+    return render_template("lookup.html")
